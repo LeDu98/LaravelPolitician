@@ -16,6 +16,7 @@ class CreatePoliticalPartiesTable extends Migration
         Schema::create('political_parties', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
         });
     }
 
