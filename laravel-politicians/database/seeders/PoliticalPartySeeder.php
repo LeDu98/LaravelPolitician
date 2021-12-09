@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PoliticalParty;
 use Illuminate\Database\Seeder;
 
 class PoliticalPartySeeder extends Seeder
@@ -13,6 +14,6 @@ class PoliticalPartySeeder extends Seeder
      */
     public function run()
     {
-        //
+        PoliticalParty::factory()->count(10)->create();
     }
 }

@@ -14,7 +14,10 @@ class PoliticianFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'first_name'=>$this->faker->firstName,
+            'last_name'=>$this->faker->lastName,
+            'gender'=>$this->faker->numberBetween($min = 1, $max = 2),
+            'political_party_id'=>$this->faker->numberBetween($min = 1, $max = 10)
         ];
     }
 }
