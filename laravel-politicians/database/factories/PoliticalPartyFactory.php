@@ -14,7 +14,7 @@ class PoliticalPartyFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->lexify('????'),
+            'name'=>$this->faker->lexify('???'),
             'country_id'=>$this->faker->numberBetween($min=1,$max=7)
         ];
     }
