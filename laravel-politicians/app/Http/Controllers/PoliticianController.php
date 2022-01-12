@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PoliticalParty;
 use App\Models\Politician;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class PoliticianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function all()
     {
-        //
+        $politician=Politician::all();
+        $polical_party=PoliticalParty::all();
+        return view('politician',['politician'=>$politician,'political_party'=>$polical_party]);
     }
 
     /**
@@ -22,64 +25,20 @@ class PoliticianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $input=$request->all();
+        $polical_party= Politician::create($input);
+        return redirect('/politician');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function delete(Request $request,$id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Politician  $politician
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Politician $politician)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Politician  $politician
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Politician $politician)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Politician  $politician
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Politician $politician)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Politician  $politician
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Politician $politician)
-    {
-        //
+        $politician=Politician::find($id);
+        if(isset($_POST['delete'])){
+            $politician->delete();
+        }
+        return redirect('/politician');
     }
 }

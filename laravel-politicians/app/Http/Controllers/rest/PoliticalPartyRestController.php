@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
+use App\Models\PoliticalParty;
 use Illuminate\Http\Request;
 
-class CountryController extends Controller
+class PoliticalPartyRestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(PoliticalParty::all(),'200');
     }
 
     /**
@@ -35,27 +35,29 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input=$request->all();
+        $political_party= PoliticalParty::create($input);
+        return response()->json($political_party,'200');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\PoliticalParty  $politicalParty
      * @return \Illuminate\Http\Response
      */
-    public function show(Country $country)
+    public function show(PoliticalParty $politicalParty)
     {
-        //
+        return response()->json($politicalParty,'200');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\PoliticalParty  $politicalParty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit(PoliticalParty $politicalParty)
     {
         //
     }
@@ -64,22 +66,25 @@ class CountryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\PoliticalParty  $politicalParty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, PoliticalParty $politicalParty)
     {
-        //
+        $input=$request->all();
+        $politicalParty->update($input);
+        return response()->json($politicalParty,'200');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\PoliticalParty  $politicalParty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy(PoliticalParty $politicalParty)
     {
-        //
+        $politicalParty->delete();
+        return response()->json('ok','200');
     }
 }
