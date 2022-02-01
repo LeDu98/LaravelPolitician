@@ -4,6 +4,7 @@ use App\Http\Controllers\rest\PoliticalPartyRestController;
 use App\Http\Controllers\rest\PoliticianRestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Politician;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,8 @@ Route::apiResources([
     '/politician'=>PoliticianRestController::class,
     '/polical_parties'=>PoliticalPartyRestController::class,
 ]);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/politicians', function () {
+    return Politician::all();
+});

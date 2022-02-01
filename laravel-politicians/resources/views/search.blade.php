@@ -37,7 +37,7 @@
     <script>
         let politicians = [];
         $(document).ready(function() {
-            $.getJSON('http://localhost:8000/api/politician', function(data) {
+            $.getJSON('http://localhost:8000/api/politicians', function(data) {
 
                 politicians = data;
             });
@@ -53,7 +53,7 @@
             $('#content').attr('hidden', false);
             $('#politician').html('');
 
-            for (let politicians of data) {
+            for (let politician of data) {
 
                 $('#politician').append(`
                     <tr>
