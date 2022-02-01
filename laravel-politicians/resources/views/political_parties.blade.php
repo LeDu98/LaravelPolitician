@@ -9,12 +9,12 @@
    
    </div>
    <div class='col-2'>
-   <a href="/political_party/{{$political_party->id}}">
+   <a href="/political_parties/{{$politicalParty->id}}">
         <button class='btn form-control mt-2 btn-secondary'>Edit</button>
     </a>
    </div>
    <div class='col-2'>
-   <form action="/city/{{$city->id}}/delete" method="post">
+   <form action="/political_parties/{{$politicalParty->id}}/delete" method="post">
     @csrf
    <button class='btn form-control mt-2 btn-danger'>Delete</button>
    </form>

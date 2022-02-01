@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\PoliticalParty;
 use Illuminate\Http\Request;
 
@@ -22,10 +22,7 @@ class PoliticalPartyRestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -57,11 +54,7 @@ class PoliticalPartyRestController extends Controller
      * @param  \App\Models\PoliticalParty  $politicalParty
      * @return \Illuminate\Http\Response
      */
-    public function edit(PoliticalParty $politicalParty)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *

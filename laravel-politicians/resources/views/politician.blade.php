@@ -18,7 +18,7 @@
             <tr>
                 <td>{{$politician->first_name}}</td>
                 <td>{{$politician->last_name}}</td>
-                <td>{{$politician->gender==1?'M':'Z'}}</td>
+                <td>{{$politician->gender==1?'M':'W'}}</td>
                 <td>{{isset($politician->political_party)?$politician->political_party->name:'NA'}}</td>
                 <td>
                     <form action="/politician/{{$politician->id}}/delete" method="post">
@@ -33,7 +33,7 @@
         </table>
         </div>
         <div class='col-4'>
-        <h3>Create person</h3>
+        <h3>Create politician</h3>
         <form action="/politician" method="post">
             @csrf
             <label >First name</label>

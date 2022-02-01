@@ -7,7 +7,7 @@
     </div>
     <div class='row mt-2 text-center'>
         <div class='col-12'>
-            <select class='form-control' id="city">
+            <select class='form-control' id="political_party">
                 <option value="0">Select political parties</option>
                 @foreach($political_parties as $political_party)
                 <option value="{{$political_party->id}}">{{$political_party->name}}</option>
@@ -36,29 +36,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         let politicians = [];
-        $(document).ready(function () {
-            $.getJSON('http://localhost:8000/api/people', function (data) {
+        $(document).ready(function() {
+            $.getJSON('http://localhost:8000/api/politician', function(data) {
 
                 politicians = data;
             });
-            $('#city').change(function () {
+            $('#political_party').change(function() {
 
-                const selected = $('#city').val();
+                const selected = $('#political_party').val();
 
                 render(politicians.filter(element => selected == '0' || element.political_party_id == selected))
             })
         })
+
         function render(data) {
             $('#content').attr('hidden', false);
-            $('#politicians').html('');
+            $('#politician').html('');
 
-            for (let person of data) {
-                
-                $('#politicians').append(`
+            for (let politicians of data) {
+
+                $('#politician').append(`
                     <tr>
-                        <td>${politicians.first_name}</td>
-                        <td>${politicians.last_name}</td>
-                        <td>${politicians.gender === 1 ? 'Male' : 'Female'}</td>
+                        <td>${politician.first_name}</td>
+                        <td>${politician.last_name}</td>
+                        <td>${politician.gender === 1 ? 'Male' : 'Female'}</td>
                     </tr>
                 `)
             }

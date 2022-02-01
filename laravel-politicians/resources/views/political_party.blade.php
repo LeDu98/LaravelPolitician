@@ -15,7 +15,7 @@
         <input type="text" name='name' class='form-control' value='{{$political_party->name}}'>
         <label >State</label>
         <select name="country_id" class='form-control'>
-            @foreach($states as $state)
+            @foreach($countries as $country)
                 <option value="{{$country->id}}" {{$country->id==$political_party->country_id?'selected':''}} >{{$country->name}}</option>
 
             @endforeach
