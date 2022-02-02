@@ -21,6 +21,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8'
         ]);
         if ($validator->fails()) {
+            return redirect('/register');
             return response()->json($validator->errors());
         }
         $user = User::create([
@@ -30,19 +31,40 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
+        return redirect('/login');
         return response()->json(['data' => $user, 'acces_token' => $token, 'token_type' => 'Bearer',]);
     }
 
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
+            return redirect('/login');
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        return redirect('/politician');
         return response()->json(['message' => 'Hi ' . $user->name . ' welcome to home.', 'access_token' => $token, 'token_type' => 'Bearer']);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return [
+            'message' => 'You have successfully logger out and the token was successfully deleted'
+        ];
+    }
+
+    public function loginView()
+    {
+
+        return view('login');
+    }
+    public function registerView()
+    {
+
+        return view('register');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Politician;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\PoliticianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,20 @@ Route::apiResources([
 ]);
 Route::post('/register', [AuthController::class, 'register']);
 
+
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/politicians', function () {
     return Politician::all();
+});
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function (Request $request) {
+        return auth()->user();
+    });
+
+    Route::resource('politician', PoliticianController::class)->only(['create', 'delete']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
