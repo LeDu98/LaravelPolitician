@@ -8,6 +8,7 @@ use App\Models\Politician;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\PoliticianController;
 use App\Http\Resources\PoliticianResource;
+use App\Models\PoliticalParty;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +32,17 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/politician', [PoliticianController::class, 'index']);
 
-
-///////
 
 Route::resource('politician', PoliticianController::class);
 
-
-
+Route::resource('political_parties', PoliticalParty::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
     Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
-
-    Route::resource('politician', PoliticianController::class);
-
-    Route::post('/logout', [AuthController::class, 'logout']);
+    
 });
