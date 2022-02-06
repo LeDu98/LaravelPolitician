@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Politician;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\PoliticianController;
+use App\Http\Resources\PoliticianResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,18 +25,19 @@ use App\Http\Controllers\PoliticianController;
     DELETE /politicians/{id} - obrisi politicara sa datim id - jem iz baze - destroy
 */
 
-Route::apiResources([
-    '/politician'=>PoliticianRestController::class,
-    '/polical_parties'=>PoliticalPartyRestController::class,
-]);
+
 Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/politicians', function () {
-    return Politician::all();
-});
+
+
+///////
+
+Route::resource('politician', PoliticianController::class);
+
+
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -43,7 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    Route::resource('politician', PoliticianController::class)->only(['create', 'delete']);
+    Route::resource('politician', PoliticianController::class);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -37,7 +37,7 @@
     <script>
         let politicians = [];
         $(document).ready(function() {
-            $.getJSON('http://localhost:8000/api/politicians', function(data) {
+            $.getJSON('http://localhost:8000/api/politician', function(data) {
 
                 politicians = data;
             });
